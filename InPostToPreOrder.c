@@ -1,3 +1,4 @@
+//create preorder array from inorder and postorder array,
 #include<stdio.h>
 int stack[200],i, top=-1;
 //push elem in stack top
@@ -18,7 +19,7 @@ void pop(){
     top = top -1;   
 }
 //serach the last elem of postOrder in the inOrder array
-int search(int in[], int data, int n)
+int search(int in[], int data, int n) //here n = number of elems in inorder array
 {
 	int i;
 	for(i = 0; i<n; i++)
@@ -33,12 +34,16 @@ void createPreOrder(int in[], int post[], int inStart, int inEnd, int n )
 {
 	if(inStart>inEnd)
 		return;
-		
-	int rootVal = post[postIndex];//*
+	
+	//root value is the last element in the postorder array		
+	int rootVal = post[postIndex];
+	//search the index where the root value is present in the inorder array
 	int rootIndex = search(in, rootVal, n);
 	postIndex = postIndex -1;
 	
+	//right subtree will be created from rootIndex+1 th elem to end elem of inorder array
 	createPreOrder(in, post, rootIndex+1, inEnd, n);
+	//left subtree will be created from starting index to rootIndex-1 th elem  of inorder array
 	createPreOrder(in, post, inStart, rootIndex-1, n);
 	
 	//printf("%d ", rootVal);
@@ -46,9 +51,10 @@ void createPreOrder(int in[], int post[], int inStart, int inEnd, int n )
 }
 int printPreOrder(int in[], int post[], int n)
 {
+	//length of the array
 	int len = n;
+	//post index is last index of the post order array
 	postIndex = len-1;
-	//int s = stack[200];
 	createPreOrder(in, post, 0, len-1, n);
 	while( top>= 0)
 	{
