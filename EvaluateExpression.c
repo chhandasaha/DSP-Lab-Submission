@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 #include <stdlib.h>
-//func for selecting the precedence
+//func for selecting the precedence, * and / has higher precedence than + and -
 int precedence(char op)
 {
 	if(op== '+' || op == '-')
@@ -26,7 +26,7 @@ int isDigit(int data)
 { 
 	return (data >= '0' && data<= '9');
 }
-//fuch for checking operand
+//func for checking operand
 int isOperand(char s)
 {
 	return (s == '+' || s == '-' || 
@@ -88,7 +88,7 @@ int evaluate(char tokens[])
 			if(opTop != -1)
 				opTop = opTop-1;
 		}
-		else
+		else //an operator
 		{
 			//if the opStack is not empty and precedence of opTop is greater than or equal to the current token,
 			//apply operator on top two elems of val Stack
@@ -142,7 +142,6 @@ int main()
 //	opStack[i+1] = ')';
 	
 	char exp[100], exp2[100];
-	//gets(exp);
 	scanf("%s", exp);
 	int n = strlen(exp);
 	while(i<n)
@@ -160,8 +159,6 @@ int main()
 	}
      	
    	exp2[i+1]=')'; 
-   	
-
 	
 	printf("%d", evaluate(exp));
 //	int m = evaluate("((10*7)*5)+((100-(75/15))+5)");
