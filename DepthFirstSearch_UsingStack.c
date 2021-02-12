@@ -41,7 +41,7 @@ void push(int vertex)
 int pop()
 {
     int vertex;
-    if(top == -1)
+    if(isEmpty())
     {
         printf("\nStack Underflow\n");
         exit(1);
@@ -53,7 +53,7 @@ int pop()
         return vertex;
     }
 }
-//create graph
+//func to create graph
 void createGraph()
 {
     int i, maxEdges, src, dest;
@@ -70,7 +70,7 @@ void createGraph()
         if( (src == -1) && (dest == -1) )
             break;
  
-        //if( src >= n || dest >= n || src<0 || dest<0)
+        
         if( src > n || dest > n || src<0 || dest<0)
         {
             printf("\nInvalid edge!\n");
@@ -83,7 +83,7 @@ void createGraph()
     }
 }
 
-//DFS
+//DFS func
 void DFS(int v)
 {
     int i;
@@ -96,7 +96,6 @@ void DFS(int v)
             printf("%d ",v);
             state[v]=visited;
         }
-        //for(i=n-1; i>=0; i--)
         for(i=n; i>=0; i--)
         {
             if(adj[v][i]==1 && state[i]==initial)
